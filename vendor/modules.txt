@@ -7,3 +7,5 @@ github.com/go-kit/kit/transport/http
 github.com/go-logfmt/logfmt
 # github.com/gorilla/mux v1.7.4
 github.com/gorilla/mux
+# golang.org/x/time v0.0.0-20191024005414-555d28b269f0
+golang.org/x/time/rate
