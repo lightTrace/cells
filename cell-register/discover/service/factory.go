@@ -10,11 +10,10 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 )
 
-func arithmeticFactory(_ context.Context, method, path string) sd.Factory {
+func userFactory(_ context.Context, method, path string) sd.Factory {
 	return func(instance string) (endpoint endpoint.Endpoint, closer io.Closer, err error) {
 		if !strings.HasPrefix(instance, "http") {
 			instance = "http://" + instance
@@ -30,21 +29,21 @@ func arithmeticFactory(_ context.Context, method, path string) sd.Factory {
 			enc kithttp.EncodeRequestFunc
 			dec kithttp.DecodeResponseFunc
 		)
-		enc, dec = encodeArithmeticRequest, decodeArithmeticReponse
+		enc, dec = encodeUserRequest, decodeUserResponse
 
 		return kithttp.NewClient(method, tgt, enc, dec).Endpoint(), nil, nil
 	}
 }
 
-func encodeArithmeticRequest(_ context.Context, req *http.Request, request interface{}) error {
-	arithReq := request.(ArithmeticRequest)
-	p := "/" + arithReq.RequestType + "/" + strconv.Itoa(arithReq.A) + "/" + strconv.Itoa(arithReq.B)
+func encodeUserRequest(_ context.Context, req *http.Request, request interface{}) error {
+	getUserNameReq := request.(GetUserNameRequest)
+	p := "/" + getUserNameReq.UserId
 	req.URL.Path += p
 	return nil
 }
 
-func decodeArithmeticReponse(_ context.Context, resp *http.Response) (interface{}, error) {
-	var response ArithmeticResponse
+func decodeUserResponse(_ context.Context, resp *http.Response) (interface{}, error) {
+	var response GetUserNameResponse
 	var s map[string]interface{}
 
 	if respCode := resp.StatusCode; respCode >= 400 {

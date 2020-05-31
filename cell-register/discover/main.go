@@ -18,8 +18,8 @@ func main() {
 
 	// 创建环境变量
 	var (
-		consulHost = flag.String("consul.host", "", "consul server ip address")
-		consulPort = flag.String("consul.port", "", "consul server port")
+		consulHost = flag.String("consulHost", "", "consul server ip address")
+		consulPort = flag.String("consulPort", "", "consul server port")
 	)
 	flag.Parse()
 
@@ -69,4 +69,5 @@ func main() {
 
 	// 开始运行，等待结束
 	logger.Log("exit", <-errc)
+
 }

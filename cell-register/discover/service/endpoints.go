@@ -13,8 +13,8 @@ import (
 // MakeDiscoverEndpoint 使用consul.Client创建服务发现Endpoint
 // 为了方便这里默认了一些参数
 func MakeDiscoverEndpoint(ctx context.Context, client consul.Client, logger log.Logger) endpoint.Endpoint {
-	serviceName := "arithmetic"
-	tags := []string{"arithmetic", "raysonxin"}
+	serviceName := "userservice"
+	tags := []string{"primary"}
 	passingOnly := true
 	duration := 500 * time.Millisecond
 
@@ -24,7 +24,7 @@ func MakeDiscoverEndpoint(ctx context.Context, client consul.Client, logger log.
 	instancer := consul.NewInstancer(client, logger, serviceName, tags, passingOnly)
 
 	//针对calculate接口创建sd.Factory
-	factory := arithmeticFactory(ctx, "POST", "calculate")
+	factory := userFactory(ctx, "GET", "user")
 
 	//使用consul连接实例（发现服务系统）、factory创建sd.Factory
 	endpointer := sd.NewEndpointer(instancer, factory, logger)

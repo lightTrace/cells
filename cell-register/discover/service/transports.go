@@ -3,16 +3,21 @@ package service
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"github.com/go-kit/kit/endpoint"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
 	"net/http"
 )
 
+var (
+	ErrorBadRequest = errors.New("invalid request parameter")
+)
+
 func MakeHttpHandler(endpoint endpoint.Endpoint) http.Handler {
 	r := mux.NewRouter()
 
-	r.Methods("POST").Path("/calculate").Handler(kithttp.NewServer(
+	r.Methods("GET").Path(`/user/{userId}`).Handler(kithttp.NewServer(
 		endpoint,
 		decodeDiscoverRequest,
 		encodeDiscoverResponse,
@@ -21,25 +26,24 @@ func MakeHttpHandler(endpoint endpoint.Endpoint) http.Handler {
 	return r
 }
 
-// ArithmeticRequest define request struct
-type ArithmeticRequest struct {
-	RequestType string `json:"request_type"`
-	A           int    `json:"a"`
-	B           int    `json:"b"`
+type GetUserNameRequest struct {
+	UserId string `json:"userId"`
 }
 
-// ArithmeticResponse define response struct
-type ArithmeticResponse struct {
-	Result int   `json:"result"`
-	Error  error `json:"error"`
+type GetUserNameResponse struct {
+	UserName string `json:"userName"`
 }
 
 func decodeDiscoverRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request ArithmeticRequest
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return nil, err
+	vars := mux.Vars(r)
+	userId, ok := vars["userId"]
+	if !ok {
+		return nil, ErrorBadRequest
 	}
-	return request, nil
+
+	return GetUserNameRequest{
+		UserId: userId,
+	}, nil
 }
 
 func encodeDiscoverResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
