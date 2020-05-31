@@ -11,3 +11,6 @@
 
 ### go-kit服务接口限流  [地址](https://github.com/lightTrace/cells/tree/master/cell-limit)
 
+### go-kit服务注册与发现  [地址](https://github.com/lightTrace/cells/tree/master/cell-register)
+
+
