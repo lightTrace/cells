@@ -13,4 +13,7 @@
 
 ### go-kit服务注册与发现  [地址](https://github.com/lightTrace/cells/tree/master/cell-register)
 
+### go-kit服务api监控  [地址](https://github.com/lightTrace/cells/tree/master/cell-monitor)
+
+
 
