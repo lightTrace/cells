@@ -15,5 +15,8 @@
 
 ### go-kit服务api监控  [地址](https://github.com/lightTrace/cells/tree/master/cell-monitor)
 
+### go-kit服务集成jaeger实现服务监控  [地址](https://github.com/lightTrace/cells/tree/master/cell-jaeger)
+
+
 
 

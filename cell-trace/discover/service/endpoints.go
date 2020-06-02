@@ -23,7 +23,7 @@ func MakeDiscoverEndpoint(ctx context.Context, client consul.Client, logger log.
 	// 可实时查询服务实例的状态信息
 	instancer := consul.NewInstancer(client, logger, serviceName, tags, passingOnly)
 
-	//针对user接口创建sd.Factory
+	//针对calculate接口创建sd.Factory
 	factory := userFactory(ctx, "GET", "user")
 
 	//使用consul连接实例（发现服务系统）、factory创建sd.Factory

@@ -1,8 +1,8 @@
 ## api监控
 ### 代码及环境搭建
-- 我们的服务上线了，除了从日志可以查看一些运行情况外，其实现在服务接口对于我们来说是一个黑盒，我们不知道每个服务接口的延时，被调用次数等等指标的运行情况，如果想实时知道这些指标，就需要我们的api监控
-- 这里在/cell/register/middleware/metrics.go里面实现一个中间件用来在main函数里面后面装饰IUserService接口，同时这里实现IUserService的几个方法
-- 首先在/cells目录下，运行`docker-compose -f docker/docker-compose.yml up -d`用docker启动prometheus和grafana的相关环境，如果想停止使用命令`sudo docker-compose -f docker/docker-compose.yml stop`
+- 我们的服务上线了，除了从日志可以查看一些运行情况外，其实现在服务接口对于我们来说是一个黑盒，我们不知道每个服务接口的延时，被调用次数等等指标的运行情况，我们更需要历史的指标数据知道我们的系统瓶颈在哪，然后对应去做相关的优化，如果想实时知道这些指标，就需要我们的api监控
+- 这里在/cell-monitor/register/middleware/metrics.go里面实现一个中间件用来在main函数里面后面装饰IUserService接口，同时这里实现IUserService的几个方法
+- 首先在/cells目录下，运行`docker-compose -f docker/docker-compose-prometheus.yml up -d`用docker启动prometheus和grafana的相关环境，如果想停止使用命令`sudo docker-compose -f docker/docker-compose.yml stop`
 - 然后在浏览器不停访问几次localhost:8000/user/1
 
 ### 配置grafana
