@@ -7,4 +7,4 @@
                	}
                	svc = middleware.NewTracerMiddleware(tracer)(svc)`
 - 然后这里需要在方法里面都加上context，最后重启register服务
-- 然后在浏览器访问一次localhost:8000/user/1，在jaeger的后台里面可以通过Find Traces按钮来查询刚刚的链路请求
+- 然后在浏览器访问一次localhost:8000/user/1，在jaeger的后台里面可以通过Find Traces按钮来查询刚刚的链路请求.
