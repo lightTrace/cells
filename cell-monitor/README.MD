@@ -8,5 +8,5 @@
 ### 配置grafana
 - 登录Grafana：通过浏览器访问localhost:3000，使用用户名admin和yml配置的密码password登录；
 - 创建数据源：点击create your first datasource，选择Prometheus，配置HTTP.URL（建议设置为http://[IP]:[port]，不要使用localhost），最后保存成功。
-- 创建Dashboard：点击create your first dashboard，点击Title下拉菜单中的Edit，即可进入如下界面，可以选择Metric选项下拉发现会有很多可以供我们选择的指标监控，选择一个就可以展现在dashboard上面
+- 创建Dashboard：点击create your first dashboard，点击Title下拉菜单中的Edit，即可进入如下界面，可以选择Metric选项下拉发现会有很多可以供我们选择的指标监控，选择一个就可以展现在dashboard上面。
 
